@@ -6,36 +6,70 @@
 
 body {
   background-color: azure;
-  height: 100vh;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  padding: 20px;
 }
 
 .container {
-  max-width: 90vmin; /* Adjusts based on viewport size */
-  max-height: 90vmin; /* Keeps the container square */
-  aspect-ratio: 1; /* Ensures the container stays a square */
+  width: min(90vmin, 600px);
+  height: min(90vmin, 600px);
+  background-color: white;
+  border: 2px solid black;
+  display: flex;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  overflow: hidden; /* Prevent any overflow */
 }
 
 .menu {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  margin: 20px;
-}
-
-#sketcharea {
-  display: flex;
-  flex-wrap: wrap;
-  background-color: white;
-  margin: 20px auto;
+  margin-bottom: 20px;
 }
 
 #btnSize {
-  padding: 10px;
+  padding: 10px 20px;
   border-radius: 5px;
   background-color: #008cba;
   color: white;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s;
+}
+
+#btnSize:hover {
+  background-color: #006d8f;
+}
+
+#btnRColor {
+  padding: 10px 20px;
+  border-radius: 5px;
+  background-color: #008cba;
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s;
+}
+
+#btnRColor:hover {
+  background-color: #006d8f;
+}
+.row {
+  display: flex;
+  width: 100%;
+  flex: 1 0 auto;
+}
+
+.grid-square {
+  background-color: white;
+  border: 1px solid #ddd;
+  transition: background-color 0.2s;
+}
+
+.grid-square:hover {
+  background-color: lightblue;
 }

@@ -1,41 +1,60 @@
-//Create divs for grid inside container element
-
-const container = 1000;
-
 const sketchArea = document.querySelector("#sketcharea");
-sketchArea.style.width = `${container}px`;
-sketchArea.style.height = `${container}px`;
+let grid = 16; // Initial grid size
 
-let grid = 16;
+// Function to generate random RGB color
+function getRandomColor() {
+  const r = Math.floor(Math.random() * 256);
+  const g = Math.floor(Math.random() * 256);
+  const b = Math.floor(Math.random() * 256);
+  return `rgb(${r}, ${g}, ${b})`;
+}
 
 function createGridDivs() {
-  // Clear the previous grid
+  // Clear previous grid
   sketchArea.innerHTML = "";
 
-  // Get the actual container size (ensures it adapts to screen)
+  // Get the container dimensions
   const containerSize = sketchArea.offsetWidth;
+  const squareSize = containerSize / grid;
 
-  // Calculate the size of each square
-  const squareSize = container / grid;
+  // Create rows and squares
+  for (let i = 0; i < grid; i++) {
+    const row = document.createElement("div");
+    row.classList.add("row");
+    row.style.height = `${squareSize}px`;
 
-  for (let i = 0; i < grid * grid; i++) {
-    const gridSquare = document.createElement("div");
+    for (let j = 0; j < grid; j++) {
+      const gridSquare = document.createElement("div");
+      gridSquare.classList.add("grid-square");
+      gridSquare.style.width = `${squareSize}px`;
+      gridSquare.style.height = "100%";
 
-    gridSquare.style.width = `${squareSize}px`;
-    gridSquare.style.height = `${squareSize}px`;
-    gridSquare.style.backgroundColor = "white";
-    gridSquare.style.border = "1px solid grey";
+      // Add hover effect
+      gridSquare.addEventListener("mouseover", (e) => {
+        if (e.buttons === 1) {
+          // Only color when mouse button is held down
+          e.target.style.backgroundColor = "lightblue";
+        }
+      });
 
-    gridSquare.addEventListener("mouseover", () => {
-      gridSquare.style.backgroundColor = "lightblue";
-    });
+      // Add mouse down effect
+      gridSquare.addEventListener("mousedown", (e) => {
+        e.target.style.backgroundColor = "lightblue";
+      });
 
-    sketchArea.appendChild(gridSquare);
+      row.appendChild(gridSquare);
+    }
+    sketchArea.appendChild(row);
   }
 }
 
+// Prevent drag selection while drawing
+sketchArea.addEventListener("dragstart", (e) => e.preventDefault());
+
+// Create initial grid
 createGridDivs();
 
+// Resize grid button handler
 const btnResize = document.querySelector("#btnSize");
 btnResize.addEventListener("click", () => {
   let newSize = parseInt(prompt("Enter new grid size (1-100):", grid));
@@ -45,4 +64,11 @@ btnResize.addEventListener("click", () => {
   } else {
     alert("Invalid input. Please enter a number between 1 and 100.");
   }
+});
+
+// Handle window resize
+let resizeTimeout;
+window.addEventListener("resize", () => {
+  clearTimeout(resizeTimeout);
+  resizeTimeout = setTimeout(createGridDivs, 100);
 });
