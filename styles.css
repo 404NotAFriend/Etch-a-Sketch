@@ -47,7 +47,7 @@ body {
 #btnRColor {
   padding: 10px 20px;
   border-radius: 5px;
-  background-color: #008cba;
+  background-color: #13863a;
   color: white;
   border: none;
   cursor: pointer;
@@ -56,8 +56,38 @@ body {
 }
 
 #btnRColor:hover {
-  background-color: #006d8f;
+  background-color: #13863a;
 }
+
+#btnDarken {
+  padding: 10px 20px;
+  border-radius: 5px;
+  background-color: #9c27b0;
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s;
+}
+#btnDarken:hover {
+  background-color: #7b1fa2;
+}
+
+#btnChangeColor {
+  padding: 10px 20px;
+  border-radius: 5px;
+  background-color: #ff9800;
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s;
+}
+
+#btnChangeColor:hover {
+  background-color: #f57c00;
+}
+
 .row {
   display: flex;
   width: 100%;
